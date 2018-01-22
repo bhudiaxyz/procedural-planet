@@ -1,0 +1,36 @@
+renderer {
+  border: 1px solid black;
+}
+
+renderer2 {
+  margin-left: 10px;
+  position: absolute;
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.pixelated {
+  image-rendering: optimizeSpeed; /* Legal fallback */
+  image-rendering: -moz-crisp-edges; /* Firefox        */
+  image-rendering: -o-crisp-edges; /* Opera          */
+  image-rendering: -webkit-optimize-contrast; /* Safari         */
+  image-rendering: optimize-contrast; /* CSS3 Proposed  */
+  image-rendering: crisp-edges; /* CSS4 Proposed  */
+  image-rendering: pixelated; /* CSS4 Proposed  */
+  -ms-interpolation-mode: nearest-neighbor; /* IE8+           */
+}
+
+#world {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  display: block;
+  background-color: #000000;
+}
+
+.dg .slider {
+  width: 60% !important;
+}

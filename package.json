@@ -1,0 +1,94 @@
+{
+    "title": "Procedural Planet",
+    "name": "procedural-planet",
+    "version": "1.0.0",
+    "description": "Procedurally generated planet using GLSL",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "gulp",
+        "test": "gulp test",
+        "lint": "gulp lint:js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bhupendra-bhudia/procedural-planet.git"
+    },
+    "keywords": [
+        "procedural",
+        "planet",
+        "terrain",
+        "sky",
+        "space",
+        "clouds",
+        "perlin",
+        "noise",
+        "generated",
+        "computer"
+    ],
+    "author": "Bhupendra Bhudia",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/bhupendra-bhudia/procedural-planet/issues"
+    },
+    "homepage": "https://github.com/bhupendra-bhudia/procedural-planet",
+    "dependencies": {
+        "alea": "0.0.9",
+        "babel-plugin-transform-async-to-generator": "^6.22.0",
+        "babelify": "^7.3.0",
+        "bootstrap": "^4.0.0",
+        "bootstrap-sass": "^3.3.7",
+        "budo": "^9.4.7",
+        "dat.gui": "^0.6.5",
+        "filesaver.js": "^0.2.0",
+        "font-awesome": "^4.7.0",
+        "gl-matrix": "^2.3.2",
+        "glsl-atmosphere": "^2.0.0",
+        "glsl-noise": "0.0.0",
+        "glsl-random": "0.0.5",
+        "glslify": "^6.0.2",
+        "jquery": "^3.3.1",
+        "popper.js": "^1.12.9",
+        "sass-lint": "^1.12.1",
+        "simple-line-icons": "^2.4.1",
+        "simplex-noise": "^2.3.0",
+        "sprintf": "^0.1.5",
+        "stats.js": "^0.17.0",
+        "three": "^0.89.0",
+        "three-orbit-controls": "^82.1.0",
+        "worley-noise": "^1.0.1"
+    },
+    "devDependencies": {
+        "browserify": "^15.2.0",
+        "chai": "^4.1.2",
+        "eslint": "^4.15.0",
+        "eslint-plugin-mocha": "^4.11.0",
+        "gulp": "^3.9.1",
+        "gulp-clean-css": "^3.9.2",
+        "gulp-eslint": "^4.0.1",
+        "gulp-header": "^2.0.1",
+        "gulp-istanbul": "^1.1.3",
+        "gulp-mocha": "^5.0.0",
+        "gulp-notify": "^3.2.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^3.1.0",
+        "gulp-uglify": "^3.0.0",
+        "gulp-util": "^3.0.8",
+        "mocha": "^5.0.0",
+        "require-directory": "^2.1.1",
+        "vinyl-source-stream": "^2.0.0",
+        "watchify": "^3.9.0"
+    },
+    "browserify": {
+        "transform": [
+            [
+                "babelify",
+                {
+                    "plugins": [
+                        "transform-async-to-generator"
+                    ]
+                }
+            ],
+            "glslify"
+        ]
+    }
+}
