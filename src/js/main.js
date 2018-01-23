@@ -1,7 +1,7 @@
 /*!
- * Procedural Planet - Procedurally generated planet (procedural-planet v1.0.0 - https://github.com/bhupendra-bhudia/procedural-planet)
+ * Procedural Planet - Procedurally generated planet (procedural-planet v1.0.0 - https://github.com/bhudiaxyz/procedural-planet)
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-planet/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-planet/blob/master/LICENSE)
  *
  * Inspired by works: https://prolearner.github.io/procedural-planet/
  */

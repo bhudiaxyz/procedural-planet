@@ -1,4 +1,4 @@
 # procedural-planet
 Procedurally generated planet
 
-https://bhupendra-bhudia.github.io/procedural-planet
+https://bhudiaxyz.github.io/procedural-planet

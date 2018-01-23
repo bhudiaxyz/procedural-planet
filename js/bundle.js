@@ -1,7 +1,7 @@
 /*!
- * Procedural Planet - Procedurally generated planet using GLSL (procedural-planet v1.0.0 - https://github.com/bhupendra-bhudia/procedural-planet)
+ * Procedural Planet - Procedurally generated planet using GLSL (procedural-planet v1.0.0 - https://github.com/bhudiaxyz/procedural-planet)
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-planet/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-planet/blob/master/LICENSE)
  *
  * Inspired by works: https://prolearner.github.io/procedural-planet/
  */
@@ -71,7 +71,7 @@
         return random() * 0x100000000; // 2^32
       };
       random.fract53 = function() {
-        return random() + 
+        return random() +
           (random() * 0x200000 | 0) * 1.1102230246251565e-16; // 2^-53
       };
       random.version = 'Alea 0.9';
@@ -87,7 +87,7 @@
         s2 = +i[2] || 0;
         c = +i[3] || 0;
       };
- 
+
       return random;
 
     } (Array.prototype.slice.call(arguments)));
@@ -44085,7 +44085,7 @@ module.exports = function( THREE ) {
 									cpx0 = laste.x;
 									cpy0 = laste.y;
 
-									
+
 
 								}
 
@@ -44109,7 +44109,7 @@ module.exports = function( THREE ) {
 									cpx0 = laste.x;
 									cpy0 = laste.y;
 
-									
+
 
 								}
 
@@ -52013,9 +52013,9 @@ module.exports = function( THREE ) {
 
 },{}],8:[function(require,module,exports){
 /*!
- * Procedural Planet - Procedurally generated planet (procedural-planet v1.0.0 - https://github.com/bhupendra-bhudia/procedural-planet)
+ * Procedural Planet - Procedurally generated planet (procedural-planet v1.0.0 - https://github.com/bhudiaxyz/procedural-planet)
  *
- * Licensed under MIT (https://github.com/bhupendra-bhudia/procedural-planet/blob/master/LICENSE)
+ * Licensed under MIT (https://github.com/bhudiaxyz/procedural-planet/blob/master/LICENSE)
  *
  * Inspired by works: https://prolearner.github.io/procedural-planet/
  */
