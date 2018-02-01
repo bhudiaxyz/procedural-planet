@@ -1,11 +1,14 @@
 # NodeJS
-node_modules
+node_modules/
+bower_components/
 
 # Junk
+.DS_Store
 yarn.lock
 *.log
 
-# IntelliJ IDEA
+# editor
+.vscode/
 .idea/
 *.iml
 
@@ -14,3 +17,11 @@ target/
 out/
 build/
 
+# linters
+.eslintrc.json
+.sass-lint.yml
+
+# Build
+output/*.png
+output/*.jpg
+video/

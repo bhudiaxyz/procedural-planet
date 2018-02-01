@@ -1,4 +1,4 @@
-# procedural-planet
-Procedurally generated planet
+# procedural-painter
+Procedurally generated impressionist painter
 
-https://bhudiaxyz.github.io/procedural-planet
+https://bhudiaxyz.github.io/procedural-painter
