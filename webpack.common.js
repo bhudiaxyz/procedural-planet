@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
+function dir_path(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
 
   entry: {
@@ -29,7 +33,7 @@ module.exports = {
       // rule for .js/.jsx files
       {
         test: /\.(js|jsx)$/,
-        include: [path.join(__dirname, 'js', 'src')],
+        include: [path.join(__dirname, 'src', 'js')],
         exclude: [path.join(__dirname, 'node_modules')],
         use: {loader: 'babel-loader'}
       },
@@ -59,24 +63,24 @@ module.exports = {
         test: /\.(glsl|frag|vert)$/,
         include: [path.join(__dirname, 'src', 'glsl')],
         exclude: /node_modules/,
-        use: { loader: 'glslify-import-loader' }
+        use: {loader: 'glslify-import-loader'}
       },
       {
         test: /\.(glsl|frag|vert)$/,
         include: [path.join(__dirname, 'src', 'glsl')],
         exclude: /node_modules/,
-        use: { loader: 'raw-loader' }
+        use: {loader: 'raw-loader'}
       },
       {
         test: /\.(glsl|frag|vert)$/,
         include: [path.join(__dirname, 'src', 'glsl')],
-        use: { loader: 'glslify-loader' }
+        use: {loader: 'glslify-loader'}
       },
       {
         test: /\.(glsl|vert|frag)$/,
         include: [path.join(__dirname, 'src', 'glsl')],
         exclude: /node_modules/,
-        use: { loader: 'webpack-glsl-loader' }
+        use: {loader: 'webpack-glsl-loader'}
       },
 
       // rule for textures (images)
