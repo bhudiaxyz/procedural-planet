@@ -4,7 +4,7 @@ precision highp float;
 
 const vec3 turbulenceVec3 = vec3( 10.0, 10.0, 10.0 );
 
-float turbulence( vec3 p ) {
+float turbulence(vec3 p) {
   float w = 100.0;
   float t = -.5;
   for (float f = 1.0 ; f <= 10.0 ; f++ ){

@@ -32,7 +32,11 @@
     "babel",
     "sass"
   ],
-  "author": "Bhupendra Bhudia",
+  "author": {
+    "name": "Bhupendra Bhudia",
+    "email": "bhupendra@bhudia.xyz",
+    "url": "https://github.com/bhudiaxyz"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bhudiaxyz/procedural-planet/issues"

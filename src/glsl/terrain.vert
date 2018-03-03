@@ -29,7 +29,7 @@ float stripes( float x, float f) {
   return t * t - .5;
 }
 
-void main() {
+void main(void) {
   vUv = uv;
   vec4 mPosition = modelMatrix * vec4( position, 1.0 );
   vec3 nWorld = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
