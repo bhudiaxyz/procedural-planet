@@ -1,0 +1,22 @@
+.dg {
+  font-size: 6px; }
+
+.dg .slider {
+  width: 60% !important; }
+
+h1 {
+  color: #000;
+  font-family: "Lato", "Raleway", "Open Sans", sans-serif;
+  font-size: 3rem; }
+
+p {
+  color: #f00;
+  font-size: 1.125rem; }
+
+.container {
+  height: 80%;
+  width: 80%; }
+  .container canvas {
+    display: block; }
+
+/*# sourceMappingURL=home.fc3f342d9196a57c20b3.bundle.css.map*/
