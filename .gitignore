@@ -16,6 +16,7 @@ yarn.lock
 target/
 out/
 build/
+dist/
 
 # linters
 .eslintrc.json
