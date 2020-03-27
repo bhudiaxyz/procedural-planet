@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "title": "Procedural Planet",
   "description": "Procedural Planet",
+  "author": "Bhupendra Bhudia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhudiaxyz/procedural-planet/issues"
+  },
+  "homepage": "https://github.com/bhudiaxyz/procedural-planet",
   "main": "./src/js/index.js",
   "scripts": {
     "build:dev": "webpack --config webpack.dev.js --progress",
@@ -15,42 +21,18 @@
     "type": "git",
     "url": "git+https://github.com/bhudiaxyz/procedural-planet.git"
   },
-  "keywords": [
-    "procedural",
-    "perlin",
-    "noise",
-    "generated",
-    "computer",
-    "graphics",
-    "opengl",
-    "webgl",
-    "threejs",
-    "three",
-    "webpack",
-    "webpack2",
-    "es6",
-    "babel",
-    "sass"
-  ],
-  "author": "Bhupendra Bhudia",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bhudiaxyz/procedural-planet/issues"
-  },
-  "homepage": "https://github.com/bhudiaxyz/procedural-planet",
   "dependencies": {
     "gl-matrix": "^2.3.2",
-    "three": "^0.82.1",
-    "three-obj-loader": "^1.0.2",
+    "three": "^0.115.0",
+    "three-obj-loader": "^1.1.3",
     "three-orbit-controls": "^82.1.0",
-    "web-audio-beat-detector": "^4.0.0",
-    "alea": "0.0.9",
+    "alea": "^1.0.0",
     "glsl-atmosphere": "^2.0.0",
     "glsl-diffuse-lambert": "^1.0.0",
-    "glsl-noise": "0.0.0",
+    "glsl-noise": "^0.0.0",
     "interpolation": "^1.0.0",
     "orbit-controls-es6": "^2.0.1",
-    "simplex-noise": "^2.3.0",
+    "simplex-noise": "^2.4.0",
     "vecmath": "^0.1.4",
     "stats.js": "^0.17.0",
     "dat.gui": "^0.7.6"
@@ -91,5 +73,21 @@
     "webpack-dev-server": "3.7.2",
     "webpack-glsl-loader": "^1.0.1",
     "webpack-merge": "^4.2.2"
-  }
+  },
+  "keywords": [
+    "procedural",
+    "perlin",
+    "noise",
+    "generated",
+    "computer",
+    "graphics",
+    "opengl",
+    "webgl",
+    "threejs",
+    "three",
+    "webpack",
+    "es6",
+    "babel",
+    "sass"
+  ]
 }
