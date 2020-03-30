@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import OrbitControls from 'orbit-controls-es6';
-import * as Detector from './vendor/Detector';
+import WEBGL from './vendor/WebGL';
 
 import * as Alea from 'alea';
 import * as SimplexNoise from 'simplex-noise';
@@ -50,13 +50,11 @@ class Application {
       this.container = div;
     }
 
-    if (Detector.webgl) {
+    if (WEBGL.isWebGLAvailable()) {
       this.init();
       this.render();
     } else {
-      // TODO: style warning message
-      console.log('WebGL NOT supported in your browser!');
-      const warning = Detector.getWebGLErrorMessage();
+      var warning = WEBGL.getWebGLErrorMessage();
       this.container.appendChild(warning);
     }
   }
