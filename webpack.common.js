@@ -68,24 +68,17 @@ module.exports = {
         test: /\.(glsl|frag|vert)$/,
         include: [path.join(__dirname, 'src', 'glsl')],
         exclude: /node_modules/,
-        use: {loader: 'glslify-import-loader'}
-      },
-      {
-        test: /\.(glsl|frag|vert)$/,
-        include: [path.join(__dirname, 'src', 'glsl')],
-        exclude: /node_modules/,
-        use: {loader: 'raw-loader'}
-      },
-      {
-        test: /\.(glsl|frag|vert)$/,
-        include: [path.join(__dirname, 'src', 'glsl')],
-        use: {loader: 'glslify-loader'}
-      },
-      {
-        test: /\.(glsl|vert|frag)$/,
-        include: [path.join(__dirname, 'src', 'glsl')],
-        exclude: /node_modules/,
-        use: {loader: 'webpack-glsl-loader'}
+        use: [
+          'raw-loader',
+          {
+            loader: 'glslify-loader',
+            options: {
+              transform: [
+                ['glslify-hex', { 'option-1': true, 'option-2': 42 }]
+              ]
+            }
+          }
+        ]
       },
 
       // rule for textures (images)
