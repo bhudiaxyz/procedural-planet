@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+global.THREE = require('three');
+
 import OrbitControls from 'orbit-controls-es6';
 import WEBGL from './vendor/WebGL';
 
@@ -52,7 +53,7 @@ class Application {
 
     if (WEBGL.isWebGLAvailable()) {
       this.init();
-      this.render();
+      this.animate();
     } else {
       var warning = WEBGL.getWebGLErrorMessage();
       this.container.appendChild(warning);
@@ -127,7 +128,7 @@ class Application {
     this.camera.updateProjectionMatrix();
   }
 
-  render() {
+  animate() {
     this.stats.update();
     this.controls.update();
     this.update();
@@ -135,7 +136,7 @@ class Application {
     // when render is invoked via requestAnimationFrame(this.render) there is no 'this',
     // so either we bind it explicitly like so: requestAnimationFrame(this.render.bind(this));
     // or use an es6 arrow function like so:
-    requestAnimationFrame(() => this.render());
+    requestAnimationFrame(() => this.animate());
   }
 
   static createContainer() {

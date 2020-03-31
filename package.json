@@ -9,6 +9,10 @@
     "url": "https://github.com/bhudiaxyz/procedural-planet/issues"
   },
   "homepage": "https://github.com/bhudiaxyz/procedural-planet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhudiaxyz/procedural-planet.git"
+  },
   "main": "./src/js/index.js",
   "scripts": {
     "build:dev": "webpack --config webpack.dev.js --progress",
@@ -17,9 +21,10 @@
     "deploy": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages",
     "watch": "webpack --config webpack.dev.js --progress --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bhudiaxyz/procedural-planet.git"
+  "semistandard": {
+    "globals": [
+      "THREE"
+    ]
   },
   "dependencies": {
     "gl-matrix": "^2.3.2",
@@ -30,7 +35,9 @@
     "glsl-diffuse-lambert": "^1.0.0",
     "glsl-noise": "^0.0.0",
     "interpolation": "^1.0.0",
+    "load-img": "^1.0.0",
     "orbit-controls-es6": "^2.0.1",
+    "seed-random": "^2.2.0",
     "simplex-noise": "^2.4.0",
     "vecmath": "^0.1.4",
     "stats.js": "^0.17.0",
