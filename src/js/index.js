@@ -94,6 +94,11 @@ class Application {
     this.params = {
       // General
       rotate: true,
+      panRotate: true,
+      // Lighting
+      dirLightColor: 0x9f9f9f,
+      spotLightColor: 0xffffff,
+      ambLightColor: 0x040404,
       // Earth
       oceanVisible: true,
       oceanSpeed: 0.0000275963,
@@ -172,24 +177,29 @@ class Application {
 
   setupLights() {
     // directional light
-    this.dirLight = new THREE.DirectionalLight(0x9f9f9f, 1);
-    this.dirLight.position.set(EARTH_RADIUS * 5, EARTH_RADIUS * 1.5, -EARTH_RADIUS * 10);
-    this.dirLight.castShadow = true;
-    this.dirLight.shadow.camera.near = 10;
-    this.scene.add(this.dirLight);
+    this.dirLight = new THREE.DirectionalLight(this.params.dirLightColor, 1);
     this.dirLightColor = new THREE.Vector4(this.dirLight.color.r, this.dirLight.color.g, this.dirLight.color.b, 1.0);
-
+    this.dirLight.position.set(EARTH_RADIUS * 5, EARTH_RADIUS * 1.5, -EARTH_RADIUS * 2);
+    this.dirLight.castShadow = true;
+    this.dirLight.shadow.mapSize.width = 512;
+    this.dirLight.shadow.mapSize.height = 512;
+    this.dirLight.shadow.camera.near = 0.5;
+    this.dirLight.shadow.camera.far = 200;
+    this.scene.add(this.dirLight);
 
     // spotlight
-    this.spotLight = new THREE.SpotLight(0xf9f9f9);
-    this.spotLight.position.set(EARTH_RADIUS * 3, EARTH_RADIUS * 2, 0);
+    this.spotLight = new THREE.SpotLight(this.params.spotLightColor);
+    this.spotLight.position.set(EARTH_RADIUS * 1, EARTH_RADIUS * 2, EARTH_RADIUS * 0.5);
     this.spotLight.castShadow = true;
-    this.dirLight.shadow.camera.near = 10;
+    this.spotLight.shadow.mapSize.width = 512;
+    this.spotLight.shadow.mapSize.height = 512;
+    this.spotLight.shadow.camera.near = 0.5;
+    this.spotLight.shadow.camera.far = 200;
     this.scene.add(this.spotLight);
 
     // Ambient light
-    const ambientLight = new THREE.AmbientLight(0x040404);
-    this.scene.add(ambientLight);
+    this.ambientLight = new THREE.AmbientLight(this.params.ambLightColor);
+    this.scene.add(this.ambientLight);
   }
 
   setupControls() {
@@ -197,7 +207,7 @@ class Application {
     this.controls.enabled = true;
     this.controls.maxDistance = 1500;
     this.controls.minDistance = 0;
-    this.controls.autoRotate = false;
+    this.controls.autoRotate = true;
   }
 
   setupHelpers() {
@@ -225,13 +235,39 @@ class Application {
   setupParamsControl() {
     let f = this.gui.addFolder("General");
     f.add(this.params, 'rotate');
-    f.open();
+    f.add(this.controls, 'autoRotate');
+    f.close();
+
+    f = this.gui.addFolder('Lighting');
+    f.add(this.dirLight.position, 'x').name('Directional X').min(-200).max(200);
+    f.add(this.dirLight.position, 'y').name('Directional Y').min(-200).max(200);
+    f.add(this.dirLight.position, 'z').name('Directional Z').min(-200).max(200);
+
+    let dirLightColorCtrl = f.addColor(this.params, 'dirLightColor').name('Directional Color').listen();
+    dirLightColorCtrl.onChange(function() {
+        this.dirLight.color.set(this.params.dirLightColor);
+        this.dirLightColor.set(this.dirLight.color.r, this.dirLight.color.g, this.dirLight.color.b, 1.0);
+      });
+
+    f.add(this.spotLight.position, 'x').name('Spot X').min(-200).max(200);
+    f.add(this.spotLight.position, 'y').name('Spot Y').min(-200).max(200);
+    f.add(this.spotLight.position, 'z').name('Spot Z').min(-200).max(200);
+    let spotLightColorCtrl = f.addColor(this.params, 'spotLightColor').name('Spot Color').listen();
+    spotLightColorCtrl.onChange(function() {
+      this.spotLight.color.set(this.params.spotLightColor);
+    });
+
+    let ambLightColorCtrl = f.addColor(this.params, 'ambLightColor').name('Ambient Color').listen();
+    ambLightColorCtrl.onChange(function() {
+      this.ambientLight.color.set(this.params.ambLightColor);
+    });
+    f.close();
 
     f = this.gui.addFolder('Camera');
     f.add(this.camera.position, 'x').name('Camera X').min(-200).max(200);
     f.add(this.camera.position, 'y').name('Camera Y').min(-200).max(200);
     f.add(this.camera.position, 'z').name('Camera Z').min(-200).max(200);
-    f.open();
+    f.close();
 
     f = this.gui.addFolder("Earth");
     f.add(this.params, 'oceanVisible');
@@ -242,7 +278,7 @@ class Application {
     f.add(this.params, 'earthRotationX', -0.05, 0.05);
     f.add(this.params, 'earthRotationY', -0.05, 0.05);
     f.add(this.params, 'earthRotationZ', -0.05, 0.05);
-    f.open();
+    f.close();
 
     f = this.gui.addFolder("Clouds");
     f.add(this.params, 'cloudsVisible');
@@ -252,14 +288,14 @@ class Application {
     f.add(this.params, 'cloudRotationX', -0.05, 0.05);
     f.add(this.params, 'cloudRotationY', -0.05, 0.05);
     f.add(this.params, 'cloudRotationZ', -0.05, 0.05);
-    f.open();
+    f.close();
 
     f = this.gui.addFolder("Moon");
     f.add(this.params, 'moonVisible');
     f.add(this.params, 'moonSpeed', -0.05, 0.05);
     f.add(this.params, 'moonRoughness', 0.0, 2.0);
     f.add(this.params, 'moonLacunarity', 0.0, 2.0);
-    f.open();
+    f.close();
   }
 
   setupPlanetEarth() {
@@ -280,7 +316,7 @@ class Application {
           texGrass: {type: "t", value: textureLoader.load(imgGrass)},
           texStone: {type: "t", value: textureLoader.load(imgStone)},
           texSnow: {type: "t", value: textureLoader.load(imgSnow)},
-          lightPosition: {type: 'v3', value: this.dirLight.position.clone()},
+          lightPosition: {type: 'v3', value: this.dirLight.position},
           lightColor: {type: 'v4', value: this.dirLightColor},
           lightIntensity: {type: 'f', value: this.dirLight.intensity},
           time: {type: "f", value: 0.0},
@@ -293,6 +329,8 @@ class Application {
       })
     );
     this.earthMesh.position.set(0, 0, 0);
+    this.earthMesh.castShadow = true; // default is false
+    this.earthMesh.receiveShadow = true; //default is false
     this.earthMesh.add(this.earthPivotPoint); // pivot is tied to earth
 
     // Earth ocean
@@ -303,7 +341,7 @@ class Application {
       new THREE.ShaderMaterial({
         uniforms: {
           texWater: {type: "t", value: waterNormals},
-          lightPosition: {type: 'v3', value: this.dirLight.position.clone()},
+          lightPosition: {type: 'v3', value: this.dirLight.position},
           lightColor: {type: 'v4', value: this.dirLightColor},
           lightIntensity: {type: 'f', value: this.dirLight.intensity},
           time: {type: "f", value: 0.0},
@@ -316,6 +354,8 @@ class Application {
       })
     );
     this.oceanMesh.position.set(0, 0, 0); // relative to earth
+    this.oceanMesh.castShadow = true; // default is false
+    this.oceanMesh.receiveShadow = true; //default is false
     this.earthMesh.add(this.oceanMesh);
 
     // Earth Atmosphere Shader
@@ -323,7 +363,7 @@ class Application {
       new THREE.SphereGeometry(ATMOSPHERE_RADIUS, TWO_N, TWO_N),
       new THREE.ShaderMaterial({
         uniforms: {
-          lightPosition: {type: 'v3', value: this.dirLight.position.clone()},
+          lightPosition: {type: 'v3', value: this.dirLight.position},
           lightColor: {type: 'v4', value: this.dirLightColor},
           lightIntensity: {type: 'f', value: this.dirLight.intensity},
           time: {type: "f", value: 0.0},
@@ -338,6 +378,8 @@ class Application {
       })
     );
     this.atmosphereMesh.position.set(0, 0, 0); // relative to earth
+    this.atmosphereMesh.castShadow = true; // default is false
+    this.atmosphereMesh.receiveShadow = true; //default is false
     this.earthMesh.add(this.atmosphereMesh);
 
     // Earth Clouds Shader
@@ -345,7 +387,7 @@ class Application {
       new THREE.SphereGeometry(CLOUDS_RADIUS, TWO_N, TWO_N),
       new THREE.ShaderMaterial({
         uniforms: {
-          lightPosition: {type: 'v3', value: this.dirLight.position.clone()},
+          lightPosition: {type: 'v3', value: this.dirLight.position},
           lightColor: {type: 'v4', value: this.dirLightColor},
           lightIntensity: {type: 'f', value: this.dirLight.intensity},
           time: {type: "f", value: 0.0},
@@ -363,6 +405,8 @@ class Application {
       })
     );
     this.cloudsMesh.position.set(0, 0, 0); // relative to earth
+    this.cloudsMesh.castShadow = true; // default is false
+    this.cloudsMesh.receiveShadow = true; //default is false
     this.earthMesh.add(this.cloudsMesh);
 
     this.scene.add(this.earthMesh);
@@ -385,7 +429,7 @@ class Application {
           texStone: {type: "t", value: moonTexture},
           texSnow: {type: "t", value: moonTexture},
 
-          lightPosition: {type: 'v3', value: this.dirLight.position.clone()},
+          lightPosition: {type: 'v3', value: this.dirLight.position},
           lightColor: {type: 'v4', value: this.dirLightColor},
           lightIntensity: {type: 'f', value: this.dirLight.intensity},
 
@@ -502,6 +546,7 @@ class Application {
 
   update() {
     this.delta += 0.1;
+    // this.controls.autoRotate = this.params.panRotate;
 
     this.updateEarth();
   }

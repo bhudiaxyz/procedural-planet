@@ -2,6 +2,10 @@ precision highp float;
 
 uniform sampler2D texWater;
 uniform float radius;
+uniform vec3 lightPosition;
+uniform vec4 lightColor;
+uniform float lightIntensity;
+uniform float time;
 
 varying vec2 vUv;
 varying vec3 vPosition01;
@@ -9,39 +13,35 @@ varying vec3 vPosition;
 varying vec3 vNormal;
 varying vec3 lightDirection;
 
-uniform vec3 lightPosition;
-uniform vec4 lightColor;
-uniform float lightIntensity;
-uniform float time;
 
-vec4 getNormal( vec2 uv, float speed ) {
-  float scaleFactor = 0.06;
-  float sint = sin(time*speed)*scaleFactor/2.0;
-  float cost = cos(time*speed)*scaleFactor/3.0;
+vec4 getNormal(vec2 uv, float speed) {
+    float scaleFactor = 0.06;
+    float sint = sin(time*speed)*scaleFactor/2.0;
+    float cost = cos(time*speed)*scaleFactor/3.0;
 
-  float x1 = uv.x + sint;
-  float y1 = uv.y + cost;
+    float x1 = uv.x + sint;
+    float y1 = uv.y + cost;
 
-  float x2 = uv.x - sint;
-  float y2 = uv.y - cost;
+    float x2 = uv.x - sint;
+    float y2 = uv.y - cost;
 
-  float x3 = uv.x - sint;
-  float y3 = uv.y + cost;
+    float x3 = uv.x - sint;
+    float y3 = uv.y + cost;
 
-  float x4 = uv.x + sint;
-  float y4 = uv.y - cost;
+    float x4 = uv.x + sint;
+    float y4 = uv.y - cost;
 
-  vec4 normal = texture2D(texWater, vec2(x1, y2)) + texture2D(texWater, vec2(x2, y2)) +
-                texture2D(texWater, vec2(x3, y3)) + texture2D(texWater, vec2(x4, y4));
-  normal.xyz = normal.xyz/3.74;
-  return normal;
+    vec4 normal = texture2D(texWater, vec2(x1, y2)) + texture2D(texWater, vec2(x2, y2)) +
+    texture2D(texWater, vec2(x3, y3)) + texture2D(texWater, vec2(x4, y4));
+    normal.xyz = normal.xyz/3.74;
+    return normal;
 }
 
 void main(void)
 {
     vec3 blending = abs(vNormal);
     blending = (blending - 0.2) * 7.14;
-    blending = max(blending, 0.0); // Force weights to sum to 1.0
+    blending = max(blending, 0.0);// Force weights to sum to 1.0
     float b = (blending.x + blending.y + blending.z);
     blending /= vec3(b, b, b);
 
@@ -53,7 +53,7 @@ void main(void)
 
     float a = max(0.27, dot(((normalTex.rgb*2.0-1.0)+vNormal)/2.0, lightDirection));
 
-    vec4 color = vec4(0.0, 0.35, 0.671, 1.0);
+    vec4 color = vec4(0.0, 0.35, 0.471, 1.0);
     color.xyz = color.xyz*lightIntensity;
 
     vec4 finalColor = lightColor*color*a;

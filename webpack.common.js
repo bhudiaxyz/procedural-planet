@@ -117,6 +117,7 @@ module.exports = {
       template: path.join(__dirname, 'src', 'templates', 'index.html'),
       hash: true,
       filename: 'index.html',
+      inject: true,
       chunks: ['commons', 'home'],
       minify: {
         collapseWhitespace: true,
