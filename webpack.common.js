@@ -23,9 +23,6 @@ module.exports = {
 
   target: 'web',
   devtool: 'source-map',
-  devServer: {
-    port: 7000
-  },
 
   module: {
     rules: [
@@ -66,7 +63,7 @@ module.exports = {
       // rules for .glsl files (shaders)
       {
         test: /\.(glsl|frag|vert)$/,
-        include: [path.join(__dirname, 'src', 'glsl')],
+        include: [path.join(__dirname, 'src', 'shaders')],
         exclude: /node_modules/,
         use: [
           'raw-loader',

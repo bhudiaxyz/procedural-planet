@@ -24,12 +24,12 @@ const imgWater = require('../textures/terrain/water3.jpg');
 const imgWaterNormals = require('../textures/terrain/waternormals.jpg');
 
 // /* eslint import/no-webpack-loader-syntax: off */
-import atmosphereFragShader from '!raw-loader!glslify-loader!../glsl/atmosphere.frag';
-import cloudsFragShader from '!raw-loader!glslify-loader!../glsl/clouds.frag';
-import standardVertShader from '!raw-loader!glslify-loader!../glsl/standard.vert';
-import terrainFragShader from '!raw-loader!glslify-loader!../glsl/terrain.frag';
-import terrainVertShader from '!raw-loader!glslify-loader!../glsl/terrain.vert';
-import waterFragShader from '!raw-loader!glslify-loader!../glsl/water.frag';
+import atmosphereFragShader from '!raw-loader!glslify-loader!../shaders/atmosphere.frag';
+import cloudsFragShader from '!raw-loader!glslify-loader!../shaders/clouds.frag';
+import standardVertShader from '!raw-loader!glslify-loader!../shaders/standard.vert';
+import terrainFragShader from '!raw-loader!glslify-loader!../shaders/terrain.frag';
+import terrainVertShader from '!raw-loader!glslify-loader!../shaders/terrain.vert';
+import waterFragShader from '!raw-loader!glslify-loader!../shaders/water.frag';
 
 require('../sass/home.sass');
 
