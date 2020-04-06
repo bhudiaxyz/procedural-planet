@@ -1,10 +1,11 @@
-# NodeJS
+# Node.js related files
 node_modules/
-bower_components/
+dist/
 
-# Junk
+# OS generated files
 .DS_Store
-yarn.lock
+.Trashes
+Thumbs.db
 *.log
 
 # editor

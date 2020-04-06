@@ -1,5 +1,8 @@
 global.THREE = require('three');
 
+import 'bootstrap';
+import '../scss/index.scss';
+
 import OrbitControls from 'orbit-controls-es6';
 import WEBGL from './vendor/WebGL';
 
@@ -8,30 +11,28 @@ import * as SimplexNoise from 'simplex-noise';
 import * as Stats from 'stats.js';
 import * as dat from 'dat.gui/build/dat.gui.js';
 
-const imgGrass = require('../textures/terrain/grass1.jpg');
-const imgMoon = require('../textures/planets/moon.png');
-const imgSand = require('../textures/terrain/sand1.jpg');
-const imgSkyboxNx = require('../textures/space/dark-s_nx.jpg');
-const imgSkyboxNy = require('../textures/space/dark-s_ny.jpg');
-const imgSkyboxNz = require('../textures/space/dark-s_nz.jpg');
-const imgSkyboxPx = require('../textures/space/dark-s_px.jpg');
-const imgSkyboxPy = require('../textures/space/dark-s_py.jpg');
-const imgSkyboxPz = require('../textures/space/dark-s_pz.jpg');
-const imgSnow = require('../textures/terrain/snow1.jpg');
-const imgSpaceStar = require('../textures/space/star-cluster.png');
-const imgStone = require('../textures/terrain/stone2.jpg');
-const imgWater = require('../textures/terrain/water3.jpg');
-const imgWaterNormals = require('../textures/terrain/waternormals.jpg');
+const imgGrass = require('../assets/textures/terrain/grass1.jpg');
+const imgMoon = require('../assets/textures/planets/moon.png');
+const imgSand = require('../assets/textures/terrain/sand1.jpg');
+const imgSkyboxNx = require('../assets/textures/space/dark-s_nx.jpg');
+const imgSkyboxNy = require('../assets/textures/space/dark-s_ny.jpg');
+const imgSkyboxNz = require('../assets/textures/space/dark-s_nz.jpg');
+const imgSkyboxPx = require('../assets/textures/space/dark-s_px.jpg');
+const imgSkyboxPy = require('../assets/textures/space/dark-s_py.jpg');
+const imgSkyboxPz = require('../assets/textures/space/dark-s_pz.jpg');
+const imgSnow = require('../assets/textures/terrain/snow1.jpg');
+const imgSpaceStar = require('../assets/textures/space/star-cluster.png');
+const imgStone = require('../assets/textures/terrain/stone2.jpg');
+const imgWater = require('../assets/textures/terrain/water3.jpg');
+const imgWaterNormals = require('../assets/textures/terrain/waternormals.jpg');
 
 // /* eslint import/no-webpack-loader-syntax: off */
-import atmosphereFragShader from '!raw-loader!glslify-loader!../shaders/atmosphere.frag';
-import cloudsFragShader from '!raw-loader!glslify-loader!../shaders/clouds.frag';
-import standardVertShader from '!raw-loader!glslify-loader!../shaders/standard.vert';
-import terrainFragShader from '!raw-loader!glslify-loader!../shaders/terrain.frag';
-import terrainVertShader from '!raw-loader!glslify-loader!../shaders/terrain.vert';
-import waterFragShader from '!raw-loader!glslify-loader!../shaders/water.frag';
-
-require('../sass/home.sass');
+import atmosphereFragShader from '!raw-loader!glslify-loader!./shaders/atmosphere.frag';
+import cloudsFragShader from '!raw-loader!glslify-loader!./shaders/clouds.frag';
+import standardVertShader from '!raw-loader!glslify-loader!./shaders/standard.vert';
+import terrainFragShader from '!raw-loader!glslify-loader!./shaders/terrain.frag';
+import terrainVertShader from '!raw-loader!glslify-loader!./shaders/terrain.vert';
+import waterFragShader from '!raw-loader!glslify-loader!./shaders/water.frag';
 
 const N = 6;
 const TWO_N = Math.pow(2, N); // detail of the spheres
@@ -216,7 +217,7 @@ class Application {
     this.scene.add(gridHelper);
 
     // XYZ axes helper (XYZ axes are RGB colors, respectively)
-    const axisHelper = new THREE.AxisHelper(EARTH_RADIUS * 4);
+    const axisHelper = new THREE.AxesHelper(EARTH_RADIUS * 4);
     this.scene.add(axisHelper);
 
     // directional light helper + shadow camera helper
