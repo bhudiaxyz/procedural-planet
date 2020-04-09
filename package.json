@@ -1,5 +1,7 @@
 {
   "name": "procedural-planet",
+  "version": "1.0.0",
+  "title": "Procedural Planet",
   "description": "Procedural Planet",
   "license": "MIT",
   "author": "Bhupendra Bhudia",
@@ -11,7 +13,6 @@
   "bugs": {
     "url": "https://github.com/bhudiaxyz/procedural-planet/issues"
   },
-  "version": "1.0.0",
   "main": "./src/js/index.js",
   "scripts": {
     "build": "webpack -p --progress --mode production --config webpack.config.js",
@@ -105,6 +106,11 @@
     "webpack-glsl-loader": "^1.0.1",
     "webpack-merge": "^4.2.2"
   },
+  "semistandard": {
+    "globals": [
+      "THREE"
+    ]
+  },
   "keywords": [
     "babel",
     "computer",
@@ -135,11 +141,5 @@
       "eslint --fix",
       "git add"
     ]
-  },
-  "semistandard": {
-    "globals": [
-      "THREE"
-    ]
-  },
-  "title": "Procedural Planet"
+  }
 }
