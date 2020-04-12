@@ -51,9 +51,9 @@ void main(void)
 
     vec4 normalTex = vec_texx * blending.x + vec_texy * blending.y + vec_texz * blending.z;
 
-    float a = max(0.27, dot(((normalTex.rgb*2.0-1.0)+vNormal)/2.0, lightDirection));
+    float a = max(0.214, dot(((normalTex.rgb*2.0-1.0)+vNormal)/2.0, lightDirection));
 
-    vec4 color = vec4(0.0, 0.35, 0.471, 1.0);
+    vec4 color = vec4(0.0, 0.2921, 0.46, 1.0);
     color.xyz = color.xyz*lightIntensity;
 
     vec4 finalColor = lightColor*color*a;

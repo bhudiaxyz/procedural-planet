@@ -232,8 +232,8 @@ export default class Application {
 
     f = this.gui.addFolder('Lighting');
     f.add(this.pointLight.position, 'x').name('Point X').min(-200).max(200);
-    f.add(this.pointLight.position, 'y').name('i Y').min(-200).max(200);
-    f.add(this.pointLight.position, 'z').name('i Z').min(-200).max(200);
+    f.add(this.pointLight.position, 'y').name('Point Y').min(-200).max(200);
+    f.add(this.pointLight.position, 'z').name('Point Z').min(-200).max(200);
 
     let pointLightColorCtrl = f.addColor(this.params, 'pointLightColor').name('Point Color').listen();
     pointLightColorCtrl.onChange(function () {
@@ -346,9 +346,9 @@ export default class Application {
           lightColor: {type: 'v4', value: this.dirLightColor},
           lightIntensity: {type: 'f', value: this.dirLight.intensity},
           time: {type: "f", value: 0.0},
-          radius: {type: "f", value: EARTH_RADIUS},
-          roughness: {type: "f", value: this.params.earthRoughness},
-          lacunarity: {type: "f", value: this.params.earthLacunarity}
+          radius: {type: "f", value: EARTH_RADIUS * 1.0001},
+          roughness: {type: "f", value: this.params.earthRoughness * 2.7},
+          lacunarity: {type: "f", value: this.params.earthLacunarity * 3.14}
         },
         vertexShader: standardVertShader,
         fragmentShader: waterFragShader
