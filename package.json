@@ -48,7 +48,7 @@
     "simplex-noise": "^2.4.0",
     "sprintf": "^0.1.5",
     "stats.js": "^0.17.0",
-    "three": "^0.115.0",
+    "three": "^0.125.0",
     "three-orbit-controls": "^82.1.0",
     "vecmath": "^0.1.4",
     "worley-noise": "^2.0.1"
