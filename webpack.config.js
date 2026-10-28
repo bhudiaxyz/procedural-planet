@@ -1,12 +1,9 @@
 const path = require('path');
 const glob = require('glob');
-const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
-const CssUrlRelativePlugin = require('css-url-relative-plugin');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
 
@@ -15,72 +12,44 @@ const config = {
   devtool: IS_DEV ? 'eval' : 'source-map',
 
   entry: {
-    main: path.join(__dirname, 'src', 'js', 'index.js'),
+    main: path.join(__dirname, 'src', 'ts', 'index.ts'),
   },
   output: {
-    filename: 'js/[name].[hash].js',
+    filename: 'js/[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
       {
-        test: /\.(json)$/,
-        loader: 'json-loader',
-      },
-      {
-        test: /\.js$/,
+        test: /\.(ts|js)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
       {
         test: /\.scss$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: IS_DEV,
-            },
-          },
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              name: '[name].[ext]',
-              fallback: 'file-loader',
-              outputPath: 'assets/textures',
-            },
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 65,
-              },
-              pngquant: {
-                quality: '65-90',
-                speed: 4,
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              webp: {
-                quality: 75,
-              },
-            },
-          },
-        ],
+        type: 'asset',
+        parser: {
+          dataUrlCondition: { maxSize: 8192 },
+        },
+        generator: {
+          filename: 'assets/textures/[name][ext]',
+        },
       },
       {
         test: /\.(glsl|frag|vert)$/,
-        include: [path.join(__dirname, 'src', 'js', 'shaders')],
+        include: [path.join(__dirname, 'src', 'ts', 'shaders')],
         exclude: /node_modules/,
         use: [
           'raw-loader',
@@ -98,29 +67,23 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([
-      {
-        from: './src/assets',
-        to: 'assets',
-      },
-    ]),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'windows.jQuery': 'jquery',
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './src/assets', to: 'assets' },
+      ],
     }),
     new MiniCssExtractPlugin({
       filename: IS_DEV ? 'css/[name].css' : 'css/[name].[contenthash].css',
       chunkFilename: 'css/[id].css',
     }),
-    new webpack.HashedModuleIdsPlugin(),
-    new PreloadWebpackPlugin({
-      include: 'initial',
-    }),
-    new CssUrlRelativePlugin(),
   ],
+  performance: {
+    // three.js + WebGL assets will always exceed webpack's 244KB default
+    maxAssetSize: 4 * 1024 * 1024,
+    maxEntrypointSize: 4 * 1024 * 1024,
+  },
   devServer: {
-    contentBase: path.join(__dirname, 'src'),
+    static: path.join(__dirname, 'src'),
   },
   optimization: {
     runtimeChunk: 'single',
@@ -135,18 +98,18 @@ const config = {
         },
       },
     },
-    minimizer: [],
+    minimizer: ['...'],
   },
 };
 
 if (!IS_DEV) {
   const TerserPlugin = require('terser-webpack-plugin');
-  const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+  const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
-  config.optimization.minimizer.push(
+  config.optimization.minimizer = [
     new TerserPlugin(),
-    new OptimizeCSSAssetsPlugin({})
-  );
+    new CssMinimizerPlugin(),
+  ];
 }
 
 const files = glob.sync('./src/templates/*.html');

@@ -1,4 +1,7 @@
-// Global styling for this template
+@use 'sass:color';
+@use 'variables' as *;
+@use 'mixins' as *;
+
 html,
 body {
   font-size: 11px;
@@ -17,7 +20,7 @@ a {
   @include transition-all;
   &:hover,
   &:focus {
-    color: darken($theme-primary, 10%);
+    color: color.adjust($theme-primary, $lightness: -10%);
   }
 }
 
@@ -25,7 +28,7 @@ hr {
   max-width: 100px;
   margin: 25px auto 0;
   border-width: 1px;
-  border-color: fade-out($gray-darker, .9);
+  border-color: color.adjust($gray-darker, $alpha: -0.9);
 }
 
 hr.light {

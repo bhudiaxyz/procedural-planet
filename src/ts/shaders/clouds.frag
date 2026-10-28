@@ -16,10 +16,6 @@ varying vec3 lightDirection;
 
 const float PI = 3.14159265358979323846264;
 
-int mod(int x, int m) {
-    return int(mod(float(x), float(m)));
-}
-
 float random5(vec3 co) {
     return fract(sin(dot(co.xyz, vec3(12.9898, 78.233, 1.23456))) * (5356.5453+ seed*1234.7582));
 }

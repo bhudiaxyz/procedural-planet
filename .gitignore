@@ -1,28 +1,65 @@
-# Node.js related files
+# Dependencies and generated builds
 node_modules/
 dist/
+dist-test/
+.vite/
+coverage/
 
-# OS generated files
-.DS_Store
-.Trashes
-Thumbs.db
-*.log
-
-# editor
-.vscode/
+# Local tools and editor state
+.claude/
 .idea/
-*.iml
+.vscode/
+tools/
+_swim_tmp.mjs
 
-# Build
-target/
-out/
-build/
+# Local captures, references, and binary artwork
+shots/
+ref_images/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.avif
+*.gif
+*.bmp
+*.tif
+*.tiff
+*.svg
+*.ico
+*.mp4
+*.webm
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.glb
+*.gltf
+*.bin
+*.blend
+*.psd
+*.exr
+*.hdr
+*.zip
+*.tar
+*.gz
 
-# linters
-.eslintrc.json
-.sass-lint.yml
+# Keep only the public README & DESIGN; omit working notes
+*.md
+!README.md
+!DESIGN.md
 
-# Build
-output/*.png
-output/*.jpg
-video/
+# Local environment and logs
+.env
+.env.*
+!.env.example
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+
+# Test and browser automation output
+test-results/
+playwright-report/
+blob-report/
