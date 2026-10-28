@@ -1,0 +1,19 @@
+/*!
+  * Bootstrap v5.3.8 (https://getbootstrap.com/)
+  * Copyright 2011-2025 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/**
+ * @license
+ * Copyright 2010-2026 Three.js Authors
+ * SPDX-License-Identifier: MIT
+ */
+
+/**
+ * lil-gui
+ * https://lil-gui.georgealways.com
+ * @version 0.21.0
+ * @author George Michael Brower
+ * @license MIT
+ */
